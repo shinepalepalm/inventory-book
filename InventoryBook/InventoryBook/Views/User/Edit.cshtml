@@ -1,0 +1,55 @@
+﻿@model InventoryBook.Common.ViewModels.UserViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="Id" class="form-control" hidden/>
+            <div class="form-group">
+                <label asp-for="Login" class="control-label"></label>
+                <input asp-for="Login" class="form-control" />
+                <span asp-validation-for="Login" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Role" class="control-label"></label>
+                <select asp-for="Role" class="form-control">
+                    @if (Model?.Role == Role.Editor)
+                    {
+                        <option value="@Role.Editor" selected>Editor</option>
+                    }
+                    else
+                    {
+                        <option value="@Role.Editor">Editor</option>
+                    }
+                    @if (Model?.Role == Role.Admin)
+                    {
+                        <option value="@Role.Admin" selected>Administrator</option>
+                    }
+                    else
+                    {
+                        <option value="@Role.Admin">Administrator</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
